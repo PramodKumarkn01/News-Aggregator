@@ -6,12 +6,12 @@ import Settings from './pages/Settings';
 const App: React.FC = () => {
   return (
     <Router>
-      <nav className="bg-gray-800 text-white p-4">
+      <nav className="bg-blue-800 text-white p-4">
         <div className="container mx-auto flex justify-between">
           <h1 className="text-lg font-bold">News Aggregator</h1>
           <div className="flex gap-4">
-            <Link to="/" className="hover:underline">Home</Link>
-            <Link to="/settings" className="hover:underline">Settings</Link>
+            <Link to="/" className="hover:underline font-bold">Home</Link>
+            <Link to="/settings" className="hover:underline font-bold font-size-big">Settings</Link>
           </div>
         </div>
       </nav>

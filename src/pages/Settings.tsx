@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Settings: React.FC = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -6,6 +6,14 @@ const Settings: React.FC = () => {
 
   const categories = ['Technology', 'Sports', 'Politics', 'Business', 'Entertainment'];
   const sources = ['BBC News', 'CNN', 'The Guardian', 'New York Times'];
+
+  // Save preferences to localStorage
+  useEffect(() => {
+    const savedCategories = localStorage.getItem('selectedCategories');
+    const savedSources = localStorage.getItem('selectedSources');
+    if (savedCategories) setSelectedCategories(JSON.parse(savedCategories));
+    if (savedSources) setSelectedSources(JSON.parse(savedSources));
+  }, []);
 
   const toggleSelection = (item: string, list: string[], setList: React.Dispatch<React.SetStateAction<string[]>>) => {
     if (list.includes(item)) {
@@ -15,10 +23,17 @@ const Settings: React.FC = () => {
     }
   };
 
+  const savePreferences = () => {
+    localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
+    localStorage.setItem('selectedSources', JSON.stringify(selectedSources));
+    alert('Preferences saved!');
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-4">Settings</h1>
       
+      {/* Categories */}
       <div className="mb-6">
         <h2 className="text-xl font-semibold">Select Categories</h2>
         <div className="flex flex-wrap gap-2 mt-2">
@@ -36,6 +51,7 @@ const Settings: React.FC = () => {
         </div>
       </div>
       
+      {/* Sources */}
       <div className="mb-6">
         <h2 className="text-xl font-semibold">Select Sources</h2>
         <div className="flex flex-wrap gap-2 mt-2">
@@ -52,9 +68,17 @@ const Settings: React.FC = () => {
           ))}
         </div>
       </div>
-      
+
+      {/* Summary */}
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold">Your Preferences</h2>
+        <p>Categories: {selectedCategories.join(', ') || 'None selected'}</p>
+        <p>Sources: {selectedSources.join(', ') || 'None selected'}</p>
+      </div>
+
+      {/* Save Button */}
       <button
-        onClick={() => alert('Preferences saved!')}
+        onClick={savePreferences}
         className="bg-green-500 text-white px-6 py-2 rounded"
       >
         Save Preferences
