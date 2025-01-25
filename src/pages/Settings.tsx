@@ -30,20 +30,20 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">Settings</h1>
+    <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-xl">
+      <h1 className="text-3xl font-bold text-center text-gray-900 mb-6">Settings</h1>
       
       {/* Categories */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold">Select Categories</h2>
-        <div className="flex flex-wrap gap-2 mt-2">
+      <div className="mb-8">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4">Select Categories</h2>
+        <div className="flex flex-wrap gap-4">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => toggleSelection(category, selectedCategories, setSelectedCategories)}
-              className={`px-4 py-2 rounded border ${
-                selectedCategories.includes(category) ? 'bg-blue-500 text-white' : 'bg-gray-200'
-              }`}
+              className={`px-6 py-3 rounded-lg transition-all duration-300 ease-in-out border-2 
+                          ${selectedCategories.includes(category) ? 'bg-blue-600 text-white border-blue-600' : 'bg-gray-100 text-gray-700 border-gray-300'} 
+                          hover:bg-blue-500 hover:text-white hover:border-blue-500 focus:outline-none`}
             >
               {category}
             </button>
@@ -52,16 +52,16 @@ const Settings: React.FC = () => {
       </div>
       
       {/* Sources */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold">Select Sources</h2>
-        <div className="flex flex-wrap gap-2 mt-2">
+      <div className="mb-8">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4">Select Sources</h2>
+        <div className="flex flex-wrap gap-4">
           {sources.map((source) => (
             <button
               key={source}
               onClick={() => toggleSelection(source, selectedSources, setSelectedSources)}
-              className={`px-4 py-2 rounded border ${
-                selectedSources.includes(source) ? 'bg-blue-500 text-white' : 'bg-gray-200'
-              }`}
+              className={`px-6 py-3 rounded-lg transition-all duration-300 ease-in-out border-2 
+                          ${selectedSources.includes(source) ? 'bg-green-600 text-white border-green-600' : 'bg-gray-100 text-gray-700 border-gray-300'} 
+                          hover:bg-green-500 hover:text-white hover:border-green-500 focus:outline-none`}
             >
               {source}
             </button>
@@ -70,19 +70,21 @@ const Settings: React.FC = () => {
       </div>
 
       {/* Summary */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold">Your Preferences</h2>
-        <p>Categories: {selectedCategories.join(', ') || 'None selected'}</p>
-        <p>Sources: {selectedSources.join(', ') || 'None selected'}</p>
+      <div className="mb-8">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4">Your Preferences</h2>
+        <p className="text-lg text-gray-600">Categories: {selectedCategories.join(', ') || 'None selected'}</p>
+        <p className="text-lg text-gray-600">Sources: {selectedSources.join(', ') || 'None selected'}</p>
       </div>
 
       {/* Save Button */}
-      <button
-        onClick={savePreferences}
-        className="bg-green-500 text-white px-6 py-2 rounded"
-      >
-        Save Preferences
-      </button>
+      <div className="text-center">
+        <button
+          onClick={savePreferences}
+          className="bg-green-600 text-white px-8 py-3 rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
+        >
+          Save Preferences
+        </button>
+      </div>
     </div>
   );
 };
